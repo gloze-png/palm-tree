@@ -1,6 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import {Icon} from "@iconify/react";
+
 
 import gallery1 from "../assets/post2.jpg";
 import gallery2 from "../assets/blog_02.jpg";
