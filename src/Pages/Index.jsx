@@ -173,7 +173,8 @@ function Index() {
           playsInline
           className="absolute top-0 left-0 w-full h-full object-cover"
         >
-          <source src={hero} type="video/mp4" />
+          <source src={hero} type="video/mp4"
+          loading="lazy" />
         </video>
 
         <div className="px-[2%] md:px-[8%] xl:px-[12%] text-white h-full flex-col justify-center relative z-10 mt-40 pt-20">
@@ -372,6 +373,7 @@ function Index() {
                   <img
                     src={item.image}
                     alt={item.title}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-110 transition-all duration-300"
                   />
                 </div>
@@ -559,11 +561,12 @@ function Index() {
               className="blog-item group flex flex-col text-white"
             >
               <div className="blog-image overflow-hidden rounded-lg">
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="group-hover:scale-110 transition-all duration-300"
-              />
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  loading="lazy"
+                  className="group-hover:scale-110 transition-all duration-300"
+                />
               </div>
               <div className="blog-content pt-5">
                 <p className="text-lg font-semibold pb-2">
@@ -572,11 +575,14 @@ function Index() {
                   </span>
                   {blog.category}
                 </p>
-                <Link to={`/blog/${blog.id}`} className="text-xl font-semibold hover:text-3xl transition">
-                {blog.title}
+                <Link
+                  to={`/blog/${blog.id}`}
+                  className="text-xl font-semibold hover:text-3xl transition"
+                >
+                  {blog.title}
                 </Link>
                 <p className="text-md text-white mt-3">{blog.description}</p>
-                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -588,27 +594,39 @@ function Index() {
             Fantastic and Premium Clients
           </span>
           <h2 className="text-4xl md:text-5xl lgtext-6xl font-semibold sm:max-w-5xl mt-5 leading-tight text-white">
-           We Have Had the Pleasure of Working with Some Clients
+            We Have Had the Pleasure of Working with Some Clients
           </h2>
-          </div>
-          <div className="brand-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
-            <Link to='' className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center ">
+        </div>
+        <div className="brand-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
+          <Link
+            to=""
+            className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center "
+          >
             <img src={brand1} alt="brand-image" className="object-contain" />
             <span>View Website</span>
-            </Link>
-              <Link to='' className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center ">
+          </Link>
+          <Link
+            to=""
+            className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center "
+          >
             <img src={brand2} alt="brand-image" className="object-contain" />
             <span>View Website</span>
-            </Link>
-              <Link to='' className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center ">
+          </Link>
+          <Link
+            to=""
+            className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center "
+          >
             <img src={brand3} alt="brand-image" className="object-contain" />
             <span>View Website</span>
-            </Link>
-              <Link to='' className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center ">
+          </Link>
+          <Link
+            to=""
+            className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center "
+          >
             <img src={brand4} alt="brand-image" className="object-contain" />
             <span>View Website</span>
-            </Link>
-          </div>
+          </Link>
+        </div>
       </div>
     </>
   );
