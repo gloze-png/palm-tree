@@ -1,0 +1,374 @@
+import React, { useState } from 'react';
+import hero from '../assets/hero.mp4';
+import { Icon } from '@iconify/react';
+import { Link } from 'react-router-dom';
+
+import "@splidejs/react-splide/css"
+import MarqueeSlider from '../components/MarqueeSlider';
+
+import project1 from "../assets/work_dashboard_management.png";
+import project2 from "../assets/work_mobile_app.png";
+import project3 from "../assets/work2.jpg";
+import project4 from "../assets/work1.jpg";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import TestimonialsSection from '../components/TestimonialsSection';
+
+function Index() {
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  const services = [
+    { id: 1, title: "Mobile App Development", icon: <Icon icon="mdi:cellphone-link" width="40" height="40" />, description: "We create user-friendly mobile applications tailored to your business needs." },
+    { id: 2, title: "Web Development", icon: <Icon icon="mdi:web" width="40" height="40" />, description: "Our team builds responsive and engaging websites to enhance your online presence." },
+    { id: 3, title: "UI/UX Design", icon: <Icon icon="mdi:palette" width="40" height="40" />, description: "We design intuitive interfaces that provide an exceptional user experience." },
+    { id: 4, title: "Digital Marketing", icon: <Icon icon="mdi:bullhorn" width="40" height="40" />, description: "Boost your brand's visibility with our comprehensive digital marketing strategies." },
+    { id: 5, title: "SEO Services", icon: <Icon icon="mdi:magnify" width="40" height="40" />, description: "Improve your website's ranking on search engines with our expert SEO services." },
+    { id: 6, title: "Graphic Design", icon: <Icon icon="mdi:brush" width="40" height="40" />, description: "Our creative graphic designers craft visually appealing designs for your brand." },
+  ];
+  const projects = [
+    {
+      id:1,
+      image:project1,
+      category:"Desktop Application",
+      title:"Inventory Application"
+    },
+     {
+      id:2,
+      image:project2,
+      category:"Mobile Application",
+      title:"E-commerce Application"
+    },
+     {
+      id:3,
+      image:project3,
+      category:"Marketing",
+      title:"Social Media Marketing"
+    },
+     {
+      id:1,
+      image:project4,
+      category:"Marketing",
+      title:"Digital Marketing"
+    }
+  ];
+
+  // const testimonals =[
+  //   {
+  //     id:1,
+  //     text: "Their high level of customer service",
+  //     name: "John Deo",
+  //     role: "Social Media Manager",
+  //     rating:4.5
+
+  //   },
+  //    {
+  //     id:2,
+  //     text: "Their high level of customer service",
+  //     name: "John Deo",
+  //     role: "Social Media Manager",
+  //     rating:4.5
+  //   },
+  //    {
+  //     id:3,
+  //     text: "Their high level of customer service",
+  //     name: "John Deo",
+  //     role: "Social Media Manager",
+  //     rating:4.5
+
+  //   },
+  //   {
+  //     id:4,
+  //     text: "Their high level of customer service",
+  //     name: "John Deo",
+  //     role: "Social Media Manager",
+  //     rating:4.5
+
+  //   }
+  // ]
+
+
+  return (
+    <>
+      {/* Hero */}
+      <div className='h-screen w-full relative overflow-hidden'>
+        <video autoPlay loop muted playsInline className='absolute top-0 left-0 w-full h-full object-cover'>
+          <source src={hero} type='video/mp4' />
+        </video>
+
+        <div className="px-[2%] md:px-[8%] xl:px-[12%] text-white h-full flex-col justify-center relative z-10 mt-40 pt-20">
+          <h3 className="text-6xl font-bold bg-gradient-to-r from-purple-400 via-orange-500 to-blue-500 bg-clip-text text-transparent gradient-animate mb-8">
+            Welcome to Antlinc
+            <br />
+            <span className="block">Your Gateway to</span>
+            <span className="block">Digital Innovation.</span>
+          </h3>
+
+          <p className='text-xl md:text-2xl max-w-2xl font-normal leading-relaxed'>
+            At Antlinc, we build scalable digital products, smart systems, and next-gen experiences that shape the future of technology. Not only software, we also offer digital marketing, SEO, and graphics design services.
+          </p>
+        </div>
+      </div>
+
+      {/* Services - outside hero */}
+      <div className='service grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 py-16 px-[2%] md:px-[8%] xl:px-[12%]'>
+        {services.map((service, index) => (
+          <div
+            key={service.id}
+            className={`w-full text-center group rounded-lg p-10 flex flex-col items-center justify-center relative h-[450px] transition-all cursor-pointer hover:-translate-y-1 duration-300
+              ${activeIndex === index ? "bg-gray-200 text-black" : " bg-white text-secondary"}`}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(1)}
+          >
+            <div className='pb-4'>
+              {service.icon}
+            </div>
+            <h4 className='text-xl font-semibold mb-2'>{service.title}</h4>
+            <p className='text-sm'>{service.description}</p>
+          </div>
+        ))}
+        </div>
+        {/* About */}
+        <div className='about mt-20 px-[2%] md:px-[8%] xl:px-[12%] flex justify-between items-start lg:flex-row flex-col gap-10'>
+  <div className='about-content w-full lg:w-[60%]'>
+    <span className='text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm'>
+      Welcome To Antlinc
+    </span>
+    <h2 className='text-3xl sm:text-6xl font-semibold sm:max-w-3xl my-6 leading-tight text-white'>
+      Empowering Businesses Through Intelligent Digital Solutions.
+    </h2>
+    <ul className='flex xl:flex-nowrap flex-wrap gap-5 lg:gap-10'>
+      <li className='w-full xl:w-1/2'>
+      <span className='font-semibold text-2xl text-white '>Our Mission</span>
+      <p className='text-md sm:text-xl mt-2 text-gray-300'>
+        Our mission is to merge technology, creativity, 
+        and strategy to create digital experiences that inspire, 
+        transform, and deliver measurable results for our clients.
+      </p>
+      </li>
+       <li className='w-full xl:w-1/2'>
+      <span className='font-semibold text-2xl text-white '>Our Goal</span>
+      <p className='text-md sm:text-xl my-2 text-gray-300'>
+       Our goal is to empower businesses with smart, scalable, 
+       and innovative digital solutions that drive measurable growth, 
+       enhance user experience, and position brands for long-term success.
+      </p>
+        <Link to="/about" className="btn rounded-sm">
+      <Icon icon="vaadin:plus" width="30" height="30" />
+      <span>More About Us</span>
+    </Link>
+      </li>
+    </ul>
+  </div>
+  <div className='w-full lg:w-[40%] flex justify-center items-center'>
+    <div className='flex items-center justify-center w-[250px] h-[250px] relative no-border rounded-full '>
+     <svg
+    viewBox="0 0 300 300"
+    className="absolute w-full h-full animate-[spin_20s_linear_infinite]"
+  >
+    <defs>
+      <path
+        id="circlePath"
+        d="M150,150 m-120,0 a120,120 0 1,1 240,0 a120,120 0 1,1 -240,0"
+      />
+    </defs>
+    <text
+      fill="#fff"
+      fontSize="14"
+      fontWeight="600"
+      letterSpacing="4"
+    >
+      <textPath href="#circlePath" startOffset="0">
+        Empowering Businesses with Smart Digital Solutions — Empowering Businesses with Smart Digital Solutions
+      </textPath>
+    </text>
+  </svg>
+
+  {/* Centered number */}
+  <div className="absolute inset-0 flex items-center justify-center">
+    <div
+      className="text-6xl md:text-8xl font-bold text-transparent"
+      style={{
+        WebkitTextStrokeWidth: "3px",
+        WebkitTextStrokeColor: "#fff"
+      }}
+    >
+      7+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+        </div>
+        {/* Splide */}
+        {/* <div className='py-[2%] flex justify-center items-center'>
+          <div className='w-full overflow-hidden border-t border-white border-b flex justify-center items-center h-full'>
+            <Splide
+             options={{
+        type: "loop",
+        drag: "free",
+        autoWidth: true,
+        arrows: false,
+        pagination: false,
+        gap: "3rem",
+        speed: 5000, // speed of the loop
+        perPage: 3, // number of items visible
+        perMove: 1,
+        pauseOnHover: false,
+        resetProgress: false,
+      }}
+      extensions={{ AutoPlay: SplideAutoplay }}
+      autoplay={{
+        interval: 0, // 0 for continuous motion
+        pauseOnHover: false,
+        resetProgress: false,
+      }}
+            
+            >
+              {items.map((text, index) => (
+                <SplideSlide
+                key={index}
+                >
+                  <div
+                  className='text-[10vw] font-bold uppercase whitespace-nowrap'
+                  style={{
+                    color: "transparent",
+                    WebkitTextStroke: "2px #fff"
+                  }}
+                  >
+                    {text}
+
+                  </div>
+
+                </SplideSlide>
+              ))}
+
+            </Splide>
+          </div>
+        </div> */}
+        <MarqueeSlider />
+        <div>
+
+       {/* Featured Projects */}
+      <div className='featured mt-20 px-[2%] md:px-[8%] xl:px-[12%]'>
+        
+        {/* Heading */}
+        <div className='featured-content w-full flex flex-col lg:flex-row items-start lg:items-end justify-between mb-10'>
+          <div>
+            <span className='text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm'>
+              Featured Projects
+            </span>
+
+            <h2 className='text-2xl sm:text-6xl font-semibold sm:max-w-3xl mt-5 leading-tight text-white'>
+              Projects Showcase
+            </h2>
+          </div>
+
+          <Link to="/projects" className="btn rounded-sm flex items-center gap-2 mt-5 lg:mt-0 w-fit">
+            <Icon icon="vaadin:plus" width="30" height="30" />
+            <span>More Projects</span>
+          </Link>
+        </div>
+
+        {/* Projects Grid */}
+        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-10 w-full'>
+          {projects.map((item) => (
+            <div 
+              key={item.id}
+              className='border border-gray-300/20 p-5  cursor-pointer rounded-lg group'
+            >
+              <div className='h-[550px] w-full rounded-lg overflow-hidden mb-5'>
+                <img 
+                  src={item.image}
+                  alt={item.title}
+                  className='w-full h-full object-cover group-hover:scale-110 transition-all duration-300'
+                />
+              </div>
+              <Link to={`/projects/${item.id}`}>
+              <span className='text-white border border-gray-50/20 px-1 font-semibold text-lg rounded-sm'>{item.category}</span>
+              <h3 className='text-white sm:text-4xl font-semibold mt-2 hover:text-5xl transition-all duration-300'>
+                {item.title}
+              </h3>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+      </div>
+      </div>
+      {/* testimonial */}
+      {/* <div className='testimonals py-[8%] px-[2%] md:px-[8%] xl:px-[12%] flex flex-col lg:flex-row justify-between items-start gap-10'>
+        <div className='testimonals-content w-full lg:w-1/2 text-white'>
+       
+        <h2 className='text-3xl sm:text-6xl font-semibold sm:max-w-3xl my-5 leading-tight text-white'>
+          Testimonials
+        </h2>
+        <div className='font-normal text-xl flex items-center'>
+          4.5{" "}
+          <span className='flex text-white ml-2'></span>
+          <Icon icon="material-symbols:star-rounded" width="24" height="24" />
+           <Icon icon="material-symbols:star-rounded" width="24" height="24" />
+            <Icon icon="material-symbols:star-rounded" width="24" height="24" />
+             <Icon icon="material-symbols:star-rounded" width="24" height="24" />
+              <Icon icon="ic:round-star-half" width="24" height="24" />
+              rating from all client
+        </div>
+        </div>
+        <div className='w-full lg:w-1/2 border - 1 border-white ps-10'>
+        <Splide
+        option={{
+          type:"fade",
+          rewind:true,
+          autoPlay:true,
+          interval:4000,
+          pauseOnHover:true,
+          arrows: false,
+          pagination: false,
+          speed: 800,
+        }}
+        
+        >
+          {testimonals.map((t) => (
+            <SplideSlide key={t.id}>
+              <div className='text-white'>
+                <p className='text-white text-2xl md:text-3xl max-w-2xl leading-tight mb-6 font-medium'>
+                  {t.text}
+                </p>
+              </div>
+              <h3 className='text-2xl md:text-3xl font-semibold'>
+                {t.name}
+              </h3>
+
+            </SplideSlide>
+          ))}
+
+        </Splide>
+
+        </div>
+      </div> */}
+      <TestimonialsSection />
+      <div>
+        {/* Get In Touch */}
+        <div className='py-[8%]'>
+          <div className='contact py-[8%] md:px-[8%] xl:px-[12%] h-[800px] relative'>
+            <div className='team-content w-full lg:w-[60%] mb-10'>
+              <span className='text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm'>Get In Touch</span>
+              <h2 className='text-2xl sm:text-6xl font-semibold sm:max-w-3xl mt-5 leading-tight text-white'>
+                Send Us Your Bright Ideas
+              </h2>
+              <Link to="/contact" className='text-white text-5xl font-semibold'>Info@antlinc.com</Link>
+              <p className='text-white text-xl pt-5'>Abuja,Nigeria</p>
+            </div>
+            <div className='contact-image'>
+              <div className='cat-img-circle img-cicle- -1'></div>
+              <div className='cat-img-circle img-cicle- -2'></div>
+              <div className='cat-img-circle img-cicle- -3'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Index;
