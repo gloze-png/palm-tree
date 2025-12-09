@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Index from "./Pages/Index";
 import About from "./Pages/About";
 import { Routes, Route } from "react-router-dom";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [theme, setTheme] = useState("light");
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/" element={<Index />} />
         {/* <Route path="/about" element={<About />} /> */}
       </Routes>
+      <Footer />
     </div>
   );
 };
