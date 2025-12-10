@@ -11,7 +11,7 @@ const TestimonialsSection = lazy(() =>
   import("../components/TestimonialsSection")
 );
 
-// Optionally import images normally (bundler will handle), but rely on <img loading="lazy" />
+// images (bundler handles these)
 import project1 from "../assets/work_dashboard_management.png";
 import project2 from "../assets/work_mobile_app.png";
 import project3 from "../assets/work2.jpg";
@@ -30,7 +30,7 @@ function Index() {
   const [activeIndex, setActiveIndex] = useState(1);
   const [mounted, setMounted] = useState(false);
 
-  // Delay mount-dependent animations (like spinning SVG) until after first render
+  // Delay mount-dependent animations until after first render
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -104,7 +104,7 @@ function Index() {
         title: "Social Media Marketing",
       },
       {
-        id: 4, // changed to unique id
+        id: 4,
         image: project4,
         category: "Marketing",
         title: "Digital Marketing",
@@ -149,223 +149,230 @@ function Index() {
     []
   );
 
-  const brands = useMemo(
-    () => [brand1, brand2, brand3, brand4],
-    []
-  );
+  const brands = useMemo(() => [brand1, brand2, brand3, brand4], []);
 
   return (
     <>
-      {/* Hero */}
-      <div className="h-screen w-full relative overflow-hidden">
+      {/* HERO - mobile-first, with overlay and responsive spacing */}
+      <section className="relative w-full min-h-[70vh] md:min-h-screen overflow-hidden">
+        {/* Video background (muted + playsInline helps mobile autoplay) */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          preload="none"
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          preload="metadata"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={hero} type="video/mp4" />
         </video>
 
-        <div className="px-[2%] md:px-[8%] xl:px-[12%] text-white h-full flex-col justify-center relative z-10 mt-40 pt-20">
-          <h3 className="text-6xl font-bold bg-gradient-to-r from-purple-400 via-orange-500 to-blue-500 bg-clip-text text-transparent gradient-animate mb-8">
+        {/* subtle overlay for contrast */}
+        <div className="absolute inset-0 bg-black/45" />
+
+        <div className="relative z-10 px-4 sm:px-6 md:px-[8%] xl:px-[12%] flex flex-col justify-center min-h-[70vh] md:min-h-screen py-12">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-400 via-orange-500 to-blue-500 bg-clip-text text-transparent leading-tight mb-4">
             Welcome to Antlinc
             <br />
             <span className="block">Your Gateway to</span>
             <span className="block">Digital Innovation.</span>
-          </h3>
+          </h1>
 
-          <p className="text-xl md:text-2xl max-w-2xl font-normal leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl max-w-lg md:max-w-2xl text-white/90 leading-relaxed">
             At Antlinc, we build scalable digital products, smart systems, and
-            next-gen experiences that shape the future of technology. Not only
-            software — we also offer digital marketing, SEO, and graphics design
-            services.
+            next-gen experiences that shape the future of technology. We also
+            offer digital marketing, SEO, and graphic design services.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Services */}
-      <div className="service grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 py-16 px-[2%] md:px-[8%] xl:px-[12%]">
-        {services.map((service, index) => (
-          <div
-            key={service.id}
-            className={`w-full text-center group rounded-lg p-10 flex flex-col items-center justify-center relative h-[450px] transition-all cursor-pointer hover:-translate-y-1 duration-300
+      {/* SERVICES - responsive grid, no fixed huge heights on mobile */}
+      <section className="service py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, index) => (
+            <button
+              key={service.id}
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseLeave={() => setActiveIndex(1)}
+              className={`w-full text-center group rounded-lg p-6 sm:p-8 flex flex-col items-center justify-start relative transition-transform duration-300 hover:-translate-y-1
               ${
                 activeIndex === index
                   ? "bg-gray-200 text-black"
                   : "bg-white text-secondary"
               }`}
-            onMouseEnter={() => setActiveIndex(index)}
-            onMouseLeave={() => setActiveIndex(1)}
-          >
-            <div className="pb-4">{service.icon}</div>
-            <h4 className="text-xl font-semibold mb-2">{service.title}</h4>
-            <p className="text-sm">{service.description}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* About */}
-      <div className="about mt-20 px-[2%] md:px-[8%] xl:px-[12%] flex justify-between items-start lg:flex-row flex-col gap-10">
-        <div className="about-content w-full lg:w-[60%]">
-          <span className="text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm">
-            Welcome To Antlinc
-          </span>
-          <h2 className="text-3xl sm:text-6xl font-semibold sm:max-w-3xl my-6 leading-tight text-white">
-            Empowering Businesses Through Intelligent Digital Solutions.
-          </h2>
-          <ul className="flex xl:flex-nowrap flex-wrap gap-5 lg:gap-10">
-            <li className="w-full xl:w-1/2">
-              <span className="font-semibold text-2xl text-white">Our Mission</span>
-              <p className="text-md sm:text-xl mt-2 text-gray-300">
-                Our mission is to merge technology, creativity, and strategy to
-                create digital experiences that inspire, transform, and deliver
-                measurable results for our clients.
-              </p>
-            </li>
-            <li className="w-full xl:w-1/2">
-              <span className="font-semibold text-2xl text-white">Our Goal</span>
-              <p className="text-md sm:text-xl my-2 text-gray-300">
-                Our goal is to empower businesses with smart, scalable, and
-                innovative digital solutions that drive measurable growth,
-                enhance user experience, and position brands for long-term
-                success.
-              </p>
-              <Link to="/about" className="btn rounded-sm">
-                <Icon icon="vaadin:plus" width="30" height="30" />
-                <span>More About Us</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="w-full lg:w-[40%] flex justify-center items-center">
-          <div className="flex items-center justify-center w-[250px] h-[250px] relative no-border rounded-full ">
-            <svg
-              viewBox="0 0 300 300"
-              className={
-                mounted
-                  ? "absolute w-full h-full animate-[spin_20s_linear_infinite]"
-                  : "hidden"
-              }
+              aria-label={service.title}
             >
-              <defs>
-                <path
-                  id="circlePath"
-                  d="M150,150 m-120,0 a120,120 0 1,1 240,0 a120,120 0 1,1 -240,0"
-                />
-              </defs>
-              <text
-                fill="#fff"
-                fontSize="14"
-                fontWeight="600"
-                letterSpacing="4"
+              <div className="pb-4">{service.icon}</div>
+              <h4 className="text-lg sm:text-xl font-semibold mb-2">
+                {service.title}
+              </h4>
+              <p className="text-sm text-gray-600">{service.description}</p>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section className="about py-12 px-4 md:px-[8%] xl:px-[12%]">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:items-center">
+          <div className="w-full lg:w-2/3">
+            <span className="inline-block text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
+              Welcome To Antlinc
+            </span>
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-5 leading-tight text-white">
+              Empowering Businesses Through Intelligent Digital Solutions.
+            </h2>
+
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              <div>
+                <h3 className="font-semibold text-xl text-white">Our Mission</h3>
+                <p className="text-gray-300 mt-2">
+                  Merge technology, creativity, and strategy to create digital
+                  experiences that inspire and deliver measurable results.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-xl text-white">Our Goal</h3>
+                <p className="text-gray-300 mt-2">
+                  Empower businesses with smart, scalable, and innovative
+                  digital solutions that drive growth and enhance UX.
+                </p>
+                <Link to="/about" className="inline-flex items-center gap-2 mt-4 btn">
+                  <Icon icon="vaadin:plus" width="20" height="20" />
+                  <span>More About Us</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Circular stat - responsive sizing */}
+          <div className="w-full lg:w-1/3 flex justify-center items-center">
+            <div className="relative w-40 h-40 sm:w-56 sm:h-56">
+              <svg
+                viewBox="0 0 300 300"
+                className={
+                  mounted
+                    ? "absolute inset-0 w-full h-full animate-[spin_20s_linear_infinite]"
+                    : "hidden"
+                }
+                aria-hidden
               >
-                <textPath href="#circlePath" startOffset="0">
-                  Empowering Businesses with Smart Digital Solutions — Empowering Businesses with Smart Digital Solutions
-                </textPath>
-              </text>
-            </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div
-                className="text-6xl md:text-8xl font-bold text-transparent"
-                style={{
-                  WebkitTextStrokeWidth: "3px",
-                  WebkitTextStrokeColor: "#fff",
-                }}
-              >
-                7+
+                <defs>
+                  <path
+                    id="circlePath"
+                    d="M150,150 m-120,0 a120,120 0 1,1 240,0 a120,120 0 1,1 -240,0"
+                  />
+                </defs>
+                <text fill="#fff" fontSize="10" fontWeight="600" letterSpacing="3">
+                  <textPath href="#circlePath" startOffset="0">
+                    Empowering Businesses with Smart Digital Solutions —
+                    Empowering Businesses with Smart Digital Solutions
+                  </textPath>
+                </text>
+              </svg>
+
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div
+                  className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent"
+                  style={{
+                    WebkitTextStrokeWidth: "2px",
+                    WebkitTextStrokeColor: "#fff",
+                  }}
+                >
+                  7+
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Marquee Slider */}
-      <Suspense
-        fallback={<div className="text-white p-10">Loading marquee...</div>}
-      >
+      {/* MARQUEE */}
+      <Suspense fallback={<div className="text-white p-6">Loading marquee...</div>}>
         <MarqueeSlider />
       </Suspense>
 
-      {/* Projects */}
-      <div className="featured mt-20 px-[2%] md:px-[8%] xl:px-[12%]">
-        <div className="featured-content w-full flex flex-col lg:flex-row items-start lg:items-end justify-between mb-10">
+      {/* PROJECTS */}
+      <section className="featured py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-6 gap-4">
           <div>
-            <span className="text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm">
+            <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
               Featured Projects
             </span>
-            <h2 className="text-2xl sm:text-6xl font-semibold sm:max-w-3xl mt-5 leading-tight text-white">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mt-4 text-white">
               Projects Showcase
             </h2>
           </div>
 
-          <Link
-            to="/projects"
-            className="btn rounded-sm flex items-center gap-2 mt-5 lg:mt-0 w-fit"
-          >
-            <Icon icon="vaadin:plus" width="30" height="30" />
+          <Link to="/projects" className="btn inline-flex items-center gap-2 mt-2 lg:mt-0">
+            <Icon icon="vaadin:plus" width="18" height="18" />
             <span>More Projects</span>
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-10 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((item) => (
-            <div
+            <article
               key={item.id}
-              className="border border-gray-300/20 p-5 cursor-pointer rounded-lg group"
+              className="border border-gray-300/20 rounded-lg overflow-hidden group"
             >
-              <div className="h-[550px] w-full rounded-lg overflow-hidden mb-5">
+              {/* responsive aspect box so images keep a good ratio on mobile */}
+              <div className="w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
                   loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-all duration-300"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <Link to={`/projects/${item.id}`}>
-                <span className="text-white border border-gray-50/20 px-1 font-semibold text-lg rounded-sm">
-                  {item.category}
-                </span>
-                <h3 className="text-white sm:text-4xl font-semibold mt-2 hover:text-5xl transition-all duration-300">
-                  {item.title}
-                </h3>
-              </Link>
-            </div>
+
+              <div className="p-4 sm:p-5">
+                <Link to={`/projects/${item.id}`} className="block">
+                  <span className="inline-block text-sm font-semibold px-2 py-1 border border-white/20 rounded-sm text-white">
+                    {item.category}
+                  </span>
+                  <h3 className="text-lg sm:text-2xl font-semibold mt-3 text-white">
+                    {item.title}
+                  </h3>
+                </Link>
+              </div>
+            </article>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Testimonials */}
-      <Suspense
-        fallback={<div className="text-white p-10">Loading testimonials...</div>}
-      >
+      {/* TESTIMONIALS */}
+      <Suspense fallback={<div className="text-white p-6">Loading testimonials...</div>}>
         <TestimonialsSection />
       </Suspense>
 
-      {/* Contact / Get in Touch */}
-      <div className="py-[8%]">
-        <div className="contact py-[8%] md:px-[8%] xl:px-[12%] h-[800px] relative">
-          <div className="team-content w-full lg:w-[60%] mb-10">
-            <span className="text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm">
+      {/* CONTACT / GET IN TOUCH */}
+      <section className="py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 relative">
+          <div className="w-full lg:w-2/3">
+            <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
               Get In Touch
             </span>
-            <h2 className="text-2xl sm:text-6xl font-semibold sm:max-w-3xl mt-5 leading-tight text-white">
+
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-4 text-white">
               Send Us Your Bright Ideas
             </h2>
-            <Link to="/contact" className="text-white text-5xl font-semibold">
+
+            <Link to="/contact" className="block text-white text-lg sm:text-2xl font-semibold mt-4">
               Info@antlinc.com
             </Link>
-            <p className="text-white text-xl pt-5">Abuja, Nigeria</p>
+            <p className="text-white text-base mt-3">Abuja, Nigeria</p>
           </div>
-          <div className="contact-image">
-            <ul className="text-white grid grid-cols-2 gap-10 absolute right-46 bottom-80 social-icons">
+
+          {/* Social icons - hidden on small screens to avoid overlap */}
+          <div className="w-full lg:w-1/3 flex items-center justify-end">
+            <ul className="hidden md:flex flex-wrap gap-4">
               {["facebook", "instagram", "twitter", "linkedin"].map((name) => (
                 <li key={name}>
                   <Link
                     to="/"
-                    className="social-icon relative overflow-hidden p-10 text-xl font-bold h-[100px] rounded-full bg-secondary flex gap-8 items-center"
+                    className="flex items-center gap-3 px-4 py-3 rounded-full bg-secondary text-white hover:bg-white hover:text-secondary transition"
                   >
                     <Icon
                       icon={
@@ -377,91 +384,83 @@ function Index() {
                           ? "ri:twitter-fill"
                           : "ri:linkedin-fill"
                       }
-                      width="44"
-                      height="44"
-                      className="text-white bg-secondary p-2 rounded-full"
+                      width="20"
+                      height="20"
                     />
-                    <span>{name.charAt(0).toUpperCase() + name.slice(1)}</span>
+                    <span className="capitalize hidden lg:inline">{name}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Blog Section */}
-      <div className="blog py-[8%] px-[2%] md:px-[8%] xl:px-[12%]">
-        <div className="team-content w-full lg:w-[60%] mb-10">
-          <span className="text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm">
+      {/* BLOG */}
+      <section className="blog py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
+        <div className="max-w-6xl mx-auto mb-8">
+          <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
             Blog Post
           </span>
-          <h2 className="text-4xl md:text-5xl lgtext-6xl font-semibold sm:max-w-5xl mt-5 leading-tight text-white">
+
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mt-4 text-white max-w-3xl">
             Breaking down complex tech topics into simple, actionable insights.
           </h2>
         </div>
-        <div className="blog-wrapper grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
+
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
-            <div
-              key={blog.id}
-              className="blog-item group flex flex-col text-white"
-            >
-              <div className="blog-image overflow-hidden rounded-lg">
+            <article key={blog.id} className="group bg-transparent">
+              <div className="overflow-hidden rounded-lg aspect-[16/10]">
                 <img
                   src={blog.image}
                   alt={blog.title}
                   loading="lazy"
-                  className="group-hover:scale-110 transition-all duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
-              <div className="blog-content pt-5">
-                <p className="text-lg font-semibold pb-2">
-                  <span className="bg-white text-secondary px-3 py-1 rounded-full me-3">
+              <div className="pt-4">
+                <p className="text-sm font-semibold">
+                  <span className="bg-white text-secondary px-2 py-1 rounded-full mr-2 text-xs">
                     {blog.date}
                   </span>
-                  {blog.category}
+                  <span className="text-white/90">{blog.category}</span>
                 </p>
-                <Link
-                  to={`/blog/${blog.id}`}
-                  className="text-xl font-semibold hover:text-3xl transition"
-                >
-                  {blog.title}
+                <Link to={`/blog/${blog.id}`} className="block mt-2">
+                  <h3 className="text-lg font-semibold text-white">{blog.title}</h3>
                 </Link>
-                <p className="text-md text-white mt-3">{blog.description}</p>
+                <p className="text-sm text-gray-300 mt-2">{blog.description}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Brands */}
-      <div className="brand py-[8%] px-[2%] md:px-[8%] xl:px-[12%]">
-        <div className="brand-content w-full lg:w-[60%] mb-10">
-          <span className="text-white bg-secondary px-2 py-3 font-semibold text-md sm:text-xl rounded-sm">
-            Fantastic and Premium Clients
-          </span>
-          <h2 className="text-4xl md:text-5xl lgtext-6xl font-semibold sm:max-w-5xl mt-5 leading-tight text-white">
-            We Have Had the Pleasure of Working with Some Clients
-          </h2>
+      {/* BRANDS */}
+      <section className="brand py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-6">
+            <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
+              Fantastic and Premium Clients
+            </span>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mt-4 text-white">
+              We Have Had the Pleasure of Working with Some Clients
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center">
+            {brands.map((src, idx) => (
+              <Link
+                key={idx}
+                to="#"
+                className="brand-item flex items-center justify-center p-3 border border-gray-50/10 rounded-md bg-white/5 hover:bg-white/10 transition"
+              >
+                <img src={src} alt={`brand-${idx}`} loading="lazy" className="max-h-12 object-contain" />
+              </Link>
+            ))}
+          </div>
         </div>
-        <div className="brand-wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {brands.map((src, idx) => (
-            <Link
-              key={idx}
-              to=""
-              className="brand-item cursor-pointer border border-gray-50/20 p-5 relative flex justify-center items-center"
-            >
-              <img
-                src={src}
-                alt={`brand-${idx}`}
-                loading="lazy"
-                className="object-contain"
-              />
-              <span>View Website</span>
-            </Link>
-          ))}
-        </div>
-      </div>
+      </section>
     </>
   );
 }
