@@ -163,7 +163,7 @@ function Index() {
       <section className="py-12 px-4 md:px-[8%] xl:px-[12%]">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:items-center">
           <div className="w-full lg:w-2/3">
-            <span className="inline-block text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
+            <span className="inline-block text-secondary bg-white px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
               Welcome To Antlinc
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold my-5 leading-tight text-white">
@@ -223,7 +223,7 @@ function Index() {
       <section className="py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between mb-6 gap-4">
           <div>
-            <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
+            <span className=" text-secondary bg-white px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
               Featured Projects
             </span>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mt-4 text-white">Projects Showcase</h2>
@@ -261,7 +261,7 @@ function Index() {
       <section className="py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
         <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 relative">
           <div className="w-full lg:w-2/3">
-            <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
+            <span className=" text-secondary bg-white px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">
               Get In Touch
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold mt-4 text-white">Send Us Your Bright Ideas</h2>
@@ -272,7 +272,7 @@ function Index() {
             <ul className="hidden md:flex flex-wrap gap-4">
               {["facebook", "instagram", "twitter", "linkedin"].map((name) => (
                 <li key={name}>
-                  <Link to="/" className="flex items-center gap-3 px-4 py-3 rounded-full bg-secondary text-white hover:bg-white hover:text-secondary transition">
+                  <Link to="/" className="flex items-center gap-3 px-4 py-3 rounded-full text-secondary bg-white hover:bg-white hover:text-secondary transition">
                     <Icon icon={
                       name === "facebook" ? "ri:facebook-fill" :
                       name === "instagram" ? "iconoir:instagram" :
@@ -291,7 +291,7 @@ function Index() {
       {/* BLOG */}
       <section className="py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
         <div className="max-w-6xl mx-auto mb-8">
-          <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">Blog Post</span>
+          <span className=" text-secondary bg-white px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">Blog Post</span>
           <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mt-4 text-white max-w-3xl">Breaking down complex tech topics into simple, actionable insights.</h2>
         </div>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -319,7 +319,7 @@ function Index() {
       <section className="py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
         <div className="max-w-6xl mx-auto">
           <div className="mb-6">
-            <span className="text-white bg-secondary px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">Fantastic and Premium Clients</span>
+            <span className=" text-secondary bg-white px-3 py-2 font-semibold rounded-sm text-sm sm:text-base">Fantastic and Premium Clients</span>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mt-4 text-white">We Have Had the Pleasure of Working with Some Clients</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 items-center">
