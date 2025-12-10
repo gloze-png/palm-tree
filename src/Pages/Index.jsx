@@ -22,6 +22,9 @@ import brand1 from "../assets/brand1.png";
 import brand2 from "../assets/brand2.png";
 import brand3 from "../assets/brand3.png";
 import brand4 from "../assets/brand4.png";
+import Hero from "../components/Hero";
+import Services from "../components/Sevice";
+import AboutPage from "../components/About";
 
 function Index() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -121,7 +124,7 @@ function Index() {
   return (
     <>
       {/* HERO */}
-      <section className="relative w-full min-h-[70vh] md:min-h-screen overflow-hidden">
+      {/* <section className="relative w-full min-h-[70vh] md:min-h-screen overflow-hidden">
         <video autoPlay loop muted playsInline preload="metadata" className="absolute inset-0 w-full h-full object-cover">
           <source src={hero} type="video/mp4" />
         </video>
@@ -137,28 +140,8 @@ function Index() {
             We build scalable digital products, smart systems, and next-gen experiences. We also offer digital marketing, SEO, and graphic design services.
           </p>
         </div>
-      </section>
-
-      {/* SERVICES */}
-      <section className="py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <button
-              key={service.id}
-              onMouseEnter={() => setActiveIndex(index)}
-              onMouseLeave={() => setActiveIndex(1)}
-              className={`w-full text-center group rounded-lg p-6 sm:p-8 flex flex-col items-center justify-start relative transition-transform duration-300 hover:-translate-y-1
-                ${activeIndex === index ? "bg-gray-200 text-black" : "bg-white text-secondary"}`}
-              aria-label={service.title}
-            >
-              <div className="pb-4">{service.icon}</div>
-              <h4 className="text-lg sm:text-xl font-semibold mb-2">{service.title}</h4>
-              <p className="text-sm text-gray-600">{service.description}</p>
-            </button>
-          ))}
-        </div>
-      </section>
-
+      </section> */}
+      <Hero />
       {/* ABOUT */}
       <section className="py-12 px-4 md:px-[8%] xl:px-[12%]">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 lg:items-center">
@@ -213,6 +196,28 @@ function Index() {
           </div>
         </div>
       </section>
+
+      {/* SERVICES */}
+      <section className="py-12 md:py-16 px-4 md:px-[8%] xl:px-[12%]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, index) => (
+            <button
+              key={service.id}
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseLeave={() => setActiveIndex(1)}
+              className={`w-full text-center group rounded-lg p-6 sm:p-8 flex flex-col items-center justify-start relative transition-transform duration-300 hover:-translate-y-1
+                ${activeIndex === index ? "bg-gray-200 text-black" : "bg-white text-secondary"}`}
+              aria-label={service.title}
+            >
+              <div className="pb-4">{service.icon}</div>
+              <h4 className="text-lg sm:text-xl font-semibold mb-2">{service.title}</h4>
+              <p className="text-sm text-gray-600">{service.description}</p>
+            </button>
+          ))}
+
+        </div>
+      </section>
+      
 
       {/* MARQUEE */}
       <Suspense fallback={<div className="text-white p-6">Loading marquee...</div>}>
